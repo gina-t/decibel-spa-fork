@@ -18,7 +18,7 @@ A single page app of a music website using React + Vite + Tailwind CSS, that cal
 
 1. React with Typecript:
 
-``` zsh
+```zsh
 
 npm create vite@latest decibel
 
@@ -36,10 +36,10 @@ npm run dev
 
 2. Install Tailwind CSS, configure template paths and add @tailwind directives:
 
-``` zsh
+```zsh
 
   npm install -D tailwindcss postcss autoprefixer
-  
+
   npx tailwindcss init -p
 
  export default {
@@ -57,7 +57,7 @@ npm run dev
 
 3. Install react-router-dom @tailwindcss/forms @tailwindcss/line-clamo
 
-``` zsh
+```zsh
 
 npm install react-router-dom @tailwindcss/forms @tailwindcss/line-clamp
 
@@ -66,7 +66,6 @@ npm install react-router-dom @tailwindcss/forms @tailwindcss/line-clamp
 4.
 
 5.
-
 
 ## Usage
 
@@ -90,10 +89,12 @@ Create a new branch for the commit and start a pull request.
 
 [email] (ginadrcoder@gmail.com)
 
-
 ## Questions
 
 For enquiries, please contact me at:
 
 [email] (ginadrcoder@gmail.com)
 [github] (https://github.com/gina-t)
+
+[email] (mitchjoelklein@hotmail.com)
+[github] (https://github.com/Mjoel54)
