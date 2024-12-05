@@ -34,7 +34,7 @@ npm run dev
 
 ```
 
-2. Install Tailwind CSS, configure template paths and add @tailwind directives:
+2. Delete App.css and install Tailwind CSS, configure template paths: 
 
 ```zsh
 
@@ -55,7 +55,13 @@ npm run dev
 
 ```
 
-3. Install react-router-dom @tailwindcss/forms @tailwindcss/line-clamo
+3. Add @tailwind directives to index.css:
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+4. Install react-router-dom @tailwindcss/forms @tailwindcss/line-clamo
 
 ```zsh
 
@@ -63,9 +69,9 @@ npm install react-router-dom @tailwindcss/forms @tailwindcss/line-clamp
 
 ```
 
-4.
-
 5.
+
+6.
 
 ## Usage
 
