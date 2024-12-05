@@ -69,7 +69,13 @@ npm install react-router-dom @tailwindcss/forms @tailwindcss/line-clamp
 
 ```
 
-5.
+5. Install @heroicons/react package:
+
+```zsh
+
+npm install @heroicons/react
+
+```
 
 6.
 
