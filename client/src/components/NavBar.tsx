@@ -8,8 +8,8 @@ import kosta from '../assets/kosta.jpeg'
 const navigation = [
   { name: 'Dashboard', href: '#', current: true },
   { name: 'Login', href: '#', current: false },
+  { name: 'Album Search', href: '#', current: false },
   { name: 'Playlists', href: '#', current: false },
-  { name: 'History', href: '#', current: false },
 ]
 
 function classNames(...classes: string[]): string {
