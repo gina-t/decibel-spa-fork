@@ -1,4 +1,4 @@
-import { ChevronRightIcon } from '@heroicons/react/20/solid'
+// import { ChevronRightIcon } from '@heroicons/react/20/solid'
 import hero from '../assets/hero.jpg'
 import SongSearchBar from './SongSearchBar'
 
