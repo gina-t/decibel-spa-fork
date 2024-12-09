@@ -2,8 +2,6 @@ import { MagnifyingGlassIcon } from "@heroicons/react/16/solid";
 import { useState, useEffect } from "react";
 import { getToken, searchForItem } from "../API/auth.js";
 
-//
-
 export default function Form() {
   const [searchInput, setSearchInput] = useState("");
 
@@ -17,11 +15,11 @@ export default function Form() {
       <form style={{ width: "400px", margin: "50px auto" }}>
         <label
           htmlFor="email"
-          className="block text-sm/6 font-medium text-gray-900"
+          className="ml-1 text-pretty text-lg font-medium text-gray-400 sm:text-xl/8"
         >
-          Search for an artist
+          Search for an artist or your favourite track
         </label>
-        <div className="mt-2 grid grid-cols-1">
+        <div className="mt-2 ml-1 grid grid-cols-1">
           <input
             id="email"
             name="email"
@@ -42,12 +40,8 @@ export default function Form() {
             e.preventDefault();
             console.log("Button clicked");
           }}
-          className="rounded bg-indigo-600 px-2 py-1 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
-          style={{
-            margin: "20px auto",
-            display: "flex",
-            justifyContent: "center",
-          }}
+          className="ml-1 mt-5 rounded bg-indigo-600 px-2 py-1 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+          
         >
           Search
         </button>
