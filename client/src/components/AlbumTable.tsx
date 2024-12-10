@@ -1,12 +1,13 @@
 import { useState, useEffect } from "react";
+import { AlbumDataType } from "../interfaces/AlbumDataType";
 
 export default function AlbumTable({ albumData }) {
-  const [people, setPeople] = useState([]);
+  const [people, setPeople] = useState<AlbumDataType[]>([]);
 
   // Update people when albumData changes
   useEffect(() => {
     if (Array.isArray(albumData) && albumData.length > 0) {
-      const updatedPeople = albumData.map((album) => ({
+      const trasnformedAlbumData: AlbumDataType[] = albumData.map((album) => ({
         key: album.id,
         name: album.name,
         release_date: album.release_date,
@@ -14,7 +15,7 @@ export default function AlbumTable({ albumData }) {
         img: album.images[0]?.url || "", // Ensure a fallback if no image is present
         url: album.external_urls.spotify,
       }));
-      setPeople(updatedPeople);
+      setPeople(trasnformedAlbumData);
     }
   }, [albumData]);
 
