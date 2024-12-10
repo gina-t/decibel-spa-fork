@@ -12,7 +12,7 @@ export default function AlbumTable({ albumData }) {
         name: album.name,
         release_date: album.release_date,
         type: album.type,
-        img: album.images[0]?.url || "", // Ensure a fallback if no image is present
+        img: album.images[1]?.url || "", // Ensure a fallback if no image is present
         url: album.external_urls.spotify,
       }));
       setPeople(trasnformedAlbumData);

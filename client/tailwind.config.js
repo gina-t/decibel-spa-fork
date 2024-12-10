@@ -11,6 +11,8 @@ export default {
       }
     },
   },
-  plugins: [],
+  plugins: [
+    require('tailwind-scrollbar')({ nocompatible: true }), // Use modern styles and add rounded support
+  ],
 }
 

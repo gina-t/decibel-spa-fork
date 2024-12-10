@@ -1,7 +1,10 @@
+import Header from "../components/Header";
 
 const PlayListsPage = () => {
   return (
-    <div>PLayListsPage</div>
+    <div>
+      <Header heading="Saved Playlists" description="Test" />
+    </div>
   )
 }
 
