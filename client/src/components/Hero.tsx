@@ -1,6 +1,6 @@
 // import { ChevronRightIcon } from '@heroicons/react/20/solid'
 import hero from '../assets/hero.jpg'
-import SongSearchBar from './SongSearchBar'
+import { Link } from 'react-router-dom'
 
 const Hero = () => {
   return (
@@ -66,20 +66,20 @@ const Hero = () => {
            Resonates with you
           </p>
 
-          <div className="mt-10 flex items-center gap-x-6">
-            <SongSearchBar />
-            {/* <a
-              href="#"
+          <div className="mt-10 flex items-center gap-x-6"> 
+            <Link
+              to ="/album-search"
               className="rounded-md bg-indigo-500 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-400"
             >
               Search for your favourite tracks
-            </a>
-            <a href="#" className="text-sm/6 font-semibold text-white">
+            </Link>
+            <Link
+              to="/learn-more" 
+              className="text-sm/6 font-semibold text-white"
+            >
               Learn more <span aria-hidden="true">→</span>
-            </a> */}
-            
+            </Link>  
           </div>
-
         </div>
         <div className="mx-auto mt-16 flex max-w-2xl sm:mt-24 lg:ml-10 lg:mr-0 lg:mt-0 lg:max-w-none lg:flex-none xl:ml-32">
           <div className="max-w-3xl flex-none sm:max-w-5xl lg:max-w-none">

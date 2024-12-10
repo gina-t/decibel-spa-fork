@@ -4,12 +4,13 @@ import logo from '../assets/logo.svg'
 import mitch from '../assets/mitch.png'
 import gina from '../assets/gina.jpg'
 import kosta from '../assets/kosta.jpeg'
+import { Link } from 'react-router-dom'
 
 const navigation = [
   { name: 'Dashboard', href: '#', current: true },
-  { name: 'Login', href: '#', current: false },
-  { name: 'Album Search', href: '#', current: false },
-  { name: 'Playlists', href: '#', current: false },
+  { name: 'Login', to: '/login', current: false },
+  { name: 'Album Search', to: '/album-search', current: false },
+  { name: 'Playlists', to: '/playlists', current: false },
 ]
 
 function classNames(...classes: string[]): string {
@@ -43,17 +44,31 @@ const NavBar = () => {
             <div className="hidden sm:ml-6 sm:block">
               <div className="flex space-x-4">
                 {navigation.map((item) => (
-                  <a
-                    key={item.name}
-                    href={item.href}
-                    className={classNames(
-                      item.current ? 'bg-gray-900 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white',
-                      'px-3 py-2 rounded-md text-lg font-medium' // Increase font size here
-                    )}
-                    aria-current={item.current ? 'page' : undefined}
-                  >
-                    {item.name}
-                  </a>
+                  item.to ? (
+                    <Link
+                      key={item.name}
+                      to={item.to}
+                      className={classNames(
+                        item.current ? 'bg-gray-900 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white',
+                        'px-3 py-2 rounded-md text-lg font-medium' // Increase font size here
+                      )}
+                      aria-current={item.current ? 'page' : undefined}
+                    >
+                      {item.name}
+                    </Link>
+                  ) : (
+                    <a
+                      key={item.name}
+                      href={item.href}
+                      className={classNames(
+                        item.current ? 'bg-gray-900 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white',
+                        'px-3 py-2 rounded-md text-lg font-medium' // Increase font size here
+                      )}
+                      aria-current={item.current ? 'page' : undefined}
+                    >
+                      {item.name}
+                    </a>
+                  )
                 ))}
               </div>
             </div>
@@ -100,7 +115,6 @@ const NavBar = () => {
                     className="size-8 rounded-full"
                   />  
                 </MenuButton>
-                
               </div>
               <MenuItems
                 transition
@@ -139,18 +153,32 @@ const NavBar = () => {
       <DisclosurePanel className="sm:hidden">
         <div className="space-y-1 px-2 pb-3 pt-2">
           {navigation.map((item) => (
-            <DisclosureButton
-              key={item.name}
-              as="a"
-              href={item.href}
-              className={classNames(
-                item.current ? 'bg-gray-900 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white',
-                'block px-3 py-2 rounded-md text-base font-medium' // Increase font size here
-              )}
-              aria-current={item.current ? 'page' : undefined}
-            >
-              {item.name}
-            </DisclosureButton>
+            item.to ? (
+              <Link
+                key={item.name}
+                to={item.to}
+                className={classNames(
+                  item.current ? 'bg-gray-900 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white',
+                  'block px-3 py-2 rounded-md text-base font-medium' // Increase font size here
+                )}
+                aria-current={item.current ? 'page' : undefined}
+              >
+                {item.name}
+              </Link>
+            ) : (
+              <DisclosureButton
+                key={item.name}
+                as="a"
+                href={item.href}
+                className={classNames(
+                  item.current ? 'bg-gray-900 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white',
+                  'block px-3 py-2 rounded-md text-base font-medium' // Increase font size here
+                )}
+                aria-current={item.current ? 'page' : undefined}
+              >
+                {item.name}
+              </DisclosureButton>
+            )
           ))}
         </div>
       </DisclosurePanel>
@@ -158,4 +186,4 @@ const NavBar = () => {
   )
 }
 
-export default NavBar
+export default NavBar;
