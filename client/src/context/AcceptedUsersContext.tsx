@@ -1,19 +1,19 @@
-import { createContext, useState, ReactNode } from 'react';
+import React, { createContext, useState, useContext, ReactNode } from 'react';
 
-import { User } from '../interfaces/UserInterface';
+import { UserLogin } from '../interfaces/UserLogin';
 
 interface AcceptedUsersContextProps {
-  acceptedUsers: User[];
-  addAcceptedUser: (user: User) => void;
+  acceptedUsers: UserLogin[];
+  addAcceptedUser: (user: UserLogin) => void;
   removeAcceptedUser: (userId: number) => void;
 }
 
 const AcceptedUsersContext = createContext<AcceptedUsersContextProps | undefined>(undefined);
 
 export const AcceptedUsersProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
-  const [acceptedUsers, setAcceptedUsers] = useState<User[]>([]);
+  const [acceptedUsers, setAcceptedUsers] = useState<UserLogin[]>([]);
 
-  const addAcceptedUser = (user: User) => {
+  const addAcceptedUser = (user: UserLogin) => {
     setAcceptedUsers((prevUsers) => [...prevUsers, user]);
   };
 

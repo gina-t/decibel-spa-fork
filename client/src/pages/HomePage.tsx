@@ -1,11 +1,11 @@
+import Hero from '../components/Hero';
 
 const HomePage = () => {
   return (
     <div>
-      <h1>Checkout Decibel for your sounds tailored to you.</h1>
+      <Hero />
     </div>
-     
-  )
-}
+  );
+};
 
-export default HomePage
+export default HomePage;
