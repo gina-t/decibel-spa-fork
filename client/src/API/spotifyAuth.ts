@@ -1,7 +1,14 @@
+import { SpotifyTokenResponse } from "../interfaces/SpotifyTokenResponse";
+
 // Get Spotify Token
-export async function getToken() {
-  const clientId = import.meta.env.VITE_CLIENT_ID;
-  const clientSecret = import.meta.env.VITE_CLIENT_SECRET;
+export async function getToken(): Promise< string | undefined> {
+  const clientId = import.meta.env.VITE_CLIENT_ID as string;
+  const clientSecret = import.meta.env.VITE_CLIENT_SECRET as string;
+
+  if (!clientId || !clientSecret) {
+    console.error("Client ID or Client Secret is missing.");
+    return;
+  }
 
   try {
     const response = await fetch("https://accounts.spotify.com/api/token", {
@@ -20,7 +27,7 @@ export async function getToken() {
       throw new Error(`Failed to get token: ${response.statusText}`);
     }
 
-    const data = await response.json();
+    const data: SpotifyTokenResponse = await response.json();
     // console.log("Access Token:", data.access_token);
     return data.access_token; // Return the token for further use
   } catch (error) {

@@ -1,14 +1,14 @@
 import { MagnifyingGlassIcon } from "@heroicons/react/24/solid";
-import { useState, useEffect } from "react";
+import { useState, useEffect, ChangeEvent, FormEvent } from "react";
 import { getToken } from "../API/spotifyAuth.js";
 import AlbumTable from "./AlbumTable.js";
 
 export default function AlbumSearch() {
-  const [searchInput, setSearchInput] = useState("");
-  const [accessToken, setAccessToken] = useState("");
-  const [artistID, setArtistID] = useState("");
-  const [albumData, setAlbumData] = useState([]);
-  const [loading, setLoading] = useState(false);
+  const [accessToken, setAccessToken] = useState<string>("");
+  const [searchInput, setSearchInput] = useState<string>("");
+  const [artistID, setArtistID] = useState<string>("");
+  const [albumData, setAlbumData] = useState<[]>([]);
+  const [loading, setLoading] = useState<boolean>(false);
 
   // Calls the fetchToken function once when the component is initially rendered
   useEffect(() => {
@@ -16,9 +16,11 @@ export default function AlbumSearch() {
   }, []);
 
   // Fetches an access token to Spotify to be able to make API requests
-  const fetchToken = async () => {
+  const fetchToken = async (): Promise<void> => {
     try {
-      let token = await getToken(); // Wait for the Promise to resolve
+      // NOTE: Functioning application used let instead of const
+      const token = await getToken(); // Wait for the Promise to resolve
+
       setAccessToken(token); // Set the access token
       // console.log(token); // Log the full token object
       // console.log(`Token: ${token}`); // Log the access token
@@ -29,13 +31,13 @@ export default function AlbumSearch() {
   };
 
   // Handles user changes to the search input field
-  const handleChange = (e) => {
+  const handleChange = (e: ChangeEvent<HTMLInputElement>): void => {
     setSearchInput(e.target.value);
     // console.log(`searchInput: ${searchInput}`);
   };
 
   // Handles the form search event
-  async function search(e) {
+  async function search(e: FormEvent): Promise<void> {
     e.preventDefault();
 
     //Render the loading spinner
