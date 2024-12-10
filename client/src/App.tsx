@@ -1,15 +1,17 @@
-import NavBar from "./components/NavBar"
-import Hero from "./components/Hero"
-import Footer from "./components/Footer"
+import { Outlet } from "react-router-dom";
+import NavBar from "./components/NavBar";
+import Hero from "./components/Hero";
+import Footer from "./components/Footer";
 
 const App = () => {
   return (
     <div>
       <NavBar />
-           <Hero />
+      <Hero />
+      <Outlet />
       <Footer />
     </div>
-  )
+  );
 }
 
-export default App
+export default App;

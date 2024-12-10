@@ -1,8 +1,10 @@
-import NavBar from "../components/NavBar"
 
 const HomePage = () => {
   return (
-    <NavBar />
+    <div>
+      <h1>Checkout Decibel for your sounds tailored to you.</h1>
+    </div>
+     
   )
 }
 
