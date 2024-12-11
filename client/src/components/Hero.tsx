@@ -41,32 +41,17 @@ const Hero = () => {
           className="aspect-[1108/632] w-[69.25rem] bg-gradient-to-r from-[#80caff] to-[#4f46e5] opacity-20"
         />
       </div>
-      <div className="mx-auto max-w-7xl px-6 pb-24 pt-10 sm:pb-32 lg:flex lg:px-8 lg:py-40">
+      <div className="mx-auto max-w-7xl px-6 pb-20 pt-10 sm:pb-32 lg:flex lg:px-8 lg:py-40">
         <div className="mx-auto max-w-2xl shrink-0 lg:mx-0 lg:pt-8">
-          {/* <img
-            alt="logo"
-            src={logo}
-            className="h-11"
-          /> */}
-          {/* <div className="mt-24 sm:mt-32 lg:mt-16">
-            <a href="#" className="inline-flex space-x-6">
-              <span className="rounded-full bg-indigo-500/10 px-3 py-1 text-sm/6 font-semibold text-indigo-400 ring-1 ring-inset ring-indigo-500/20">
-                What's new
-              </span>
-              <span className="inline-flex items-center space-x-2 text-sm/6 font-medium text-gray-300">
-                <span>Just shipped v1.0</span>
-                <ChevronRightIcon aria-hidden="true" className="size-5 text-gray-500" />
-              </span>
-            </a>
-          </div> */}
-          <h1 className="mt-10 text-pretty text-5xl font-medium tracking-tight text-white sm:text-7xl">
+          
+          <h1 className="mt-20 text-pretty text-5xl font-medium tracking-tight text-white sm:text-7xl">
             Decibel
           </h1>
           <p className="mt-8 ml-1 text-pretty text-lg font-medium text-gray-400 sm:text-xl/8">
            Resonates with you
           </p>
 
-          <div className="mt-10 flex items-center gap-x-6"> 
+          <div className="mt-10 ml-1 flex items-center gap-x-6"> 
             <Link
               to ="/album-search"
               className="rounded-md bg-indigo-500 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-400"
@@ -88,7 +73,7 @@ const Hero = () => {
               src={hero}
               width={2432}
               height={1442}
-              className="w-[76rem] rounded-md bg-white/5 shadow-2xl ring-1 ring-white/10 opacity-50"
+              className="w-[50rem] rounded-md bg-white/5 shadow-2xl ring-1 ring-white/10 opacity-50"
             />
           </div>
         </div>
