@@ -163,7 +163,7 @@ export default function AlbumTable({ albumData }) {
 <div className="group">
   <svg
     className="fill-current text-indigo-500 group-hover:text-indigo-300 transition-colors duration-300"
-    enable-background="new 0 0 24 24"
+    enablebackground="new 0 0 24 24"
     height="24px"
     id="Layer_1"
     version="1.1"
