@@ -3,8 +3,9 @@ dotenv.config();
 
 import express from 'express';
 import cors from 'cors';
-import routes from './routes/index.js';
+import router from './routes/index.js';
 import { sequelize } from './models/index.js';
+
 // import path from 'path';
 
 const app = express();
@@ -20,7 +21,7 @@ app.use(express.static('../client/dist'));
 // app.use(express.static(path.join(__dirname, '../client/dist')));
 
 //routes
-app.use(routes);
+app.use(router);
 
 // Error handling middleware
 app.use((err: Error, _req: express.Request, res: express.Response, _next: express.NextFunction) => {
