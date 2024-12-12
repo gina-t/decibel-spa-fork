@@ -2,6 +2,8 @@
   "compilerOptions": {
     "target": "ES2020",
     "module": "ESNext",
+    "rootDir": "./",
+    "outDir": "./dist",
     "moduleResolution": "Node",
     "skipLibCheck": true,
     "allowJs": true,
@@ -17,12 +19,11 @@
     "noImplicitReturns": true,
     "noImplicitOverride": true,
     "useUnknownInCatchVariables": true,
-    
     "typeRoots": ["./node_modules/@types", "./server/types"],
     "baseUrl": ".",
     "paths": {
-      "*": ["server/types/*"]
+      "*": ["server/src/*", "server/types/*"]
     }
   },
-  "include": ["server/**/*.ts", "client/**/*.ts", "server/types/**/*.ts"]
+  "include": ["server/**/*.ts", "client/**/*.ts", "server/types/**/*.ts", "server/src/seeds/index.ts"]
 }
