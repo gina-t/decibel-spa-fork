@@ -4,20 +4,19 @@ import { User } from './User';
 
 
 
-export interface AlbumDataType {
-  album_key: string;
-  album_artist: string;
-  album_name: string;
-  release_date: string;
-  album_img: string; 
-  album_spotify_url: string;
-  artist_spotify_url: string;
-}
+// export interface AlbumDataType {
+//   album_key: string;
+//   album_artist: string;
+//   album_name: string;
+//   release_date: string;
+//   album_img: string; 
+//   album_spotify_url: string;
+//   artist_spotify_url: string;
+// }
 
 
 interface PlaylistAttributes {
   id: string;
-  name: string;
   userId: string;
   album_key: string;
   album_artist: string;
@@ -52,10 +51,6 @@ Playlist.init(
       type: DataTypes.UUID,
       defaultValue: DataTypes.UUIDV4,
       primaryKey: true,
-    },
-    name: {
-      type: DataTypes.STRING,
-      allowNull: false,
     },
     userId: {
       type: DataTypes.UUID,
