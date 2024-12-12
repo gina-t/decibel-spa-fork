@@ -17,4 +17,17 @@ CREATE TABLE users (
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
--- Add other tables and database objects as needed
+-- Create the playlist table
+CREATE TABLE playlist (
+    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+    album_key VARCHAR(255) NOT NULL,
+    album_artist VARCHAR(255) NOT NULL,
+    album_name VARCHAR(255) NOT NULL,
+    release_date DATE NOT NULL,
+    album_img VARCHAR(255),
+    album_spotify_url VARCHAR(255),
+    artist_spotify_url VARCHAR(255),
+
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
