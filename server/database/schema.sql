@@ -1,17 +1,20 @@
 -- DROP DATABASE
-DROP DATABASE IF EXISTS user_db;
+DROP DATABASE IF EXISTS spotify_ui;
 
 -- CREATE DATABASE
-CREATE DATABASE user_db;
+CREATE DATABASE spotify_ui;
 
 -- Connect to the newly created database
-\c kanban_db
+\c spotify_ui;
 
 -- Create the users table
 CREATE TABLE users (
-    id SERIAL PRIMARY KEY,
+    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     username VARCHAR(255) NOT NULL UNIQUE,
     password VARCHAR(255) NOT NULL,
-    created_at TIMESTAMPTZ DEFAULT NOW(),
-    updated_at TIMESTAMPTZ DEFAULT NOW()
+    email VARCHAR(255) NOT NULL UNIQUE,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
+
+-- Add other tables and database objects as needed
