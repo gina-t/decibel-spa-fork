@@ -89,12 +89,13 @@ export const removeAlbumFromPlaylist = async (req: Request, res: Response): Prom
         return res.status(401).json({ message: 'Unauthorized access' });
       }
   
-      // Extract album_key from the request body
-      const { album_key } = req.body;
-  
-      if (!album_key) {
+      // Validate album_key in the request body
+      if (!req.body.album_key) {
         return res.status(400).json({ message: 'Missing album key' });
       }
+
+      // Extract album_key from the request body
+      const { album_key } = req.body;
   
       // Find and delete the album from the user's playlist
       const deletedCount = await Playlist.destroy({
