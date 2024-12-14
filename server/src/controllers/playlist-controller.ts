@@ -1,16 +1,16 @@
 import { Request, Response } from 'express';
-import { User } from '../models/User';
+
 import { Playlist } from '../models/Playlist';
 
-interface AlbumDataType {
-  album_key: string;
-  album_artist: string;
-  album_name: string;
-  release_date: string;
-  album_img: string;
-  album_spotify_url: string;
-  artist_spotify_url: string;
-}
+// interface AlbumDataType {
+//   album_key: string;
+//   album_artist: string;
+//   album_name: string;
+//   release_date: string;
+//   album_img: string;
+//   album_spotify_url: string;
+//   artist_spotify_url: string;
+// }
 
 // GET /Albums
 export const getPlaylistForUser = async (req: Request, res: Response) => {
