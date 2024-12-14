@@ -1,8 +1,8 @@
 {
   "compilerOptions": {
-    "target": "ES2018",
-    "module": "CommonJS",
-    "rootDir": "./",
+    "target": "ES2020",
+    "module": "ESNext",
+    "rootDir": "./src",
     "outDir": "./dist",
     "moduleResolution": "Node",
     "skipLibCheck": true,
