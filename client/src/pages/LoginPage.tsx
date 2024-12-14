@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import AuthService from '../utils/auth'; 
 import logo from '../assets/logo.svg';
+import { Link } from 'react-router-dom';
 
 const LoginPage = () => {
   const [email, setEmail] = useState('');
@@ -88,9 +89,10 @@ const LoginPage = () => {
 
         <p className="mt-10 text-center text-sm/6 text-gray-400">
           Not a member?{' '}
-          <a href="#" className="font-semibold text-indigo-400 hover:text-indigo-300">
-            Start a 14 day free trial
-          </a>
+          <Link to="/registration" 
+            className="font-semibold text-indigo-400 hover:text-indigo-300">
+            Register now
+          </Link>
         </p>
       </div>
     </div>

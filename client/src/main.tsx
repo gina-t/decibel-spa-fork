@@ -7,6 +7,7 @@ import App from './App';
 import AlbumSearchPage from './pages/AlbumSearchPage';
 import HomePage from './pages/HomePage';
 import LoginPage from './pages/LoginPage';
+import RegistrationPage from './pages/RegistrationPage';
 import PlayListsPage from './pages/PlayListsPage';
 import LearnMorePage from './pages/LearnMorePage';
 
@@ -21,19 +22,23 @@ const router = createBrowserRouter([
         element: <HomePage />,
       },
       {
-        path: 'album-search',
+        path: '/album-search',
         element: <AlbumSearchPage />,
       },
       {
-        path: 'login',
+        path: '/login',
         element: <LoginPage />,
       },
       {
-        path: 'playlists',
+        path: '/registration',
+        element: <RegistrationPage />,
+      },
+      {
+        path: '/playlists',
         element: <PlayListsPage />,
       },
       {
-        path: 'learn-more',
+        path: '/learn-more',
         element: <LearnMorePage />,
       },
     ],

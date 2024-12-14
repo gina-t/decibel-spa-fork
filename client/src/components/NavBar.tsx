@@ -8,7 +8,9 @@ import { Link } from 'react-router-dom';
 
 const navigation = [
   { name: 'Dashboard', to: '/', current: true },
-  { name: 'Login', to: '/login', current: false },
+  { name: 'Log In', to: '/login', current: false },
+  { name: 'Register', to: '/registration', current: false },
+  { name: 'Learn More', to: '/learn-more', current: false },
   { name: 'Album Search', to: '/album-search', current: false },
   { name: 'Playlists', to: '/playlists', current: false },
 ];
