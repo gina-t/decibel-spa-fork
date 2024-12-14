@@ -1,8 +1,8 @@
 import sequelize from './db';
-import User from './models/User';
-import Artist from './models/Artist';
-import Song from './models/Song';
-import Playlist from './models/Playlist';
+// import User from './models/User';
+// import Artist from './models/Artist';
+// import Song from './models/Song';
+// import Playlist from './models/Playlist';
 
 (async () => {
   try {
