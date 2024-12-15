@@ -7,10 +7,10 @@ export const registerUser = async (
   req: Request,
   res: Response
 ): Promise<void> => {
-  const { username, password } = req.body;
+  const { username, email, password } = req.body;
   try {
     const hashedPassword = await bcrypt.hash(password, 10);
-    const newUser = await User.create({ username, password: hashedPassword });
+    const newUser = await User.create({ username, email, password: hashedPassword });
     res.status(201).json(newUser);
   } catch (error: any) {
     console.error("Error creating user:", error);

@@ -1,52 +1,33 @@
 import { DataTypes, Sequelize, Model, Optional } from 'sequelize';
-
-// import sequelize from '../../database/db';
 import { User } from './User';
 
-
-
-// export interface AlbumDataType {
-//   album_key: string;
-//   album_artist: string;
-//   album_name: string;
-//   release_date: string;
-//   album_img: string; 
-//   album_spotify_url: string;
-//   artist_spotify_url: string;
-// }
-
-
 interface PlaylistAttributes {
-  id: number;
-
+  id: string;
   album_key: string;
   album_artist: string;
   album_name: string;
-  release_date: string;
-  album_img: string; 
-  album_spotify_url: string;
-  artist_spotify_url: string;
-  assignedUserId?: number;
+  release_date: Date;
+  album_img?: string; 
+  album_spotify_url?: string;
+  artist_spotify_url?: string;
+  assignedUserId?: string;
 }
 
 interface PlaylistCreationAttributes extends Optional<PlaylistAttributes, 'id'> {}
 
 export class Playlist extends Model<PlaylistAttributes, PlaylistCreationAttributes> implements PlaylistAttributes {
-  public id!: number;
-
+  public id!: string;
   public album_key!: string;
   public album_artist!: string;
   public album_name!: string;
-  public release_date!: string;
-  public album_img!: string;
-  public album_spotify_url!: string;
-  public artist_spotify_url!: string;
-
-  public assignedUserId!: number;
+  public release_date!: Date;
+  public album_img?: string;
+  public album_spotify_url?: string;
+  public artist_spotify_url?: string;
+  public assignedUserId!: string;
 
   // associated User model
   public readonly assignedUser?: User;
-
   public readonly createdAt!: Date;
   public readonly updatedAt!: Date;
 }
@@ -55,7 +36,8 @@ export function PlaylistFactory(sequelize: Sequelize): typeof Playlist {
   Playlist.init(
     {
       id: {
-        type: DataTypes.INTEGER,
+        type: DataTypes.UUID,
+        defaultValue: DataTypes.UUIDV4,
         autoIncrement: true,
         primaryKey: true,
       },
@@ -72,7 +54,7 @@ export function PlaylistFactory(sequelize: Sequelize): typeof Playlist {
         allowNull: false,
       },
       release_date: {
-        type: DataTypes.STRING,
+        type: DataTypes.DATE,
         allowNull: false,
       },
       album_img: {
@@ -88,12 +70,16 @@ export function PlaylistFactory(sequelize: Sequelize): typeof Playlist {
         allowNull: false,
       },
       assignedUserId: {
-        type: DataTypes.INTEGER,
-        allowNull: true,
+        type: DataTypes.UUID,
+        allowNull: false,
+        references: {
+          model: 'users',
+          key: 'id',
       },
     },
+  },
     {
-      tableName: 'playlists',
+      tableName: 'playlist',
       sequelize,
     }
   );
