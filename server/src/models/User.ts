@@ -4,6 +4,7 @@ import bcrypt from "bcrypt";
 interface UserAttributes {
   id: number;
   username: string;
+  email: string;
   password: string;
 }
 
@@ -15,6 +16,7 @@ export class User
 {
   public id!: number;
   public username!: string;
+  public email!: string;
   public password!: string;
 
   public readonly createdAt!: Date;
