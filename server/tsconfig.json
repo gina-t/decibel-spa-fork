@@ -25,5 +25,5 @@
       "*": ["server/src/*", "server/types/*"]
     }
   },
-  "include": ["server/**/*.ts", "client/**/*.ts", "server/types/**/*.ts", "server/src/seeds/index.ts"]
+  "include": ["src"]
 }
