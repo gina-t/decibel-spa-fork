@@ -1,5 +1,6 @@
-import { Model, DataTypes, Optional } from 'sequelize';
-import sequelize from '../../database/db';
+import { DataTypes, Sequelize, Model, Optional } from 'sequelize';
+
+// import sequelize from '../../database/db';
 import { User } from './User';
 
 
@@ -16,8 +17,8 @@ import { User } from './User';
 
 
 interface PlaylistAttributes {
-  id: string;
-  userId: string;
+  id: number;
+
   album_key: string;
   album_artist: string;
   album_name: string;
@@ -25,14 +26,14 @@ interface PlaylistAttributes {
   album_img: string; 
   album_spotify_url: string;
   artist_spotify_url: string;
+  assignedUserId?: number;
 }
 
 interface PlaylistCreationAttributes extends Optional<PlaylistAttributes, 'id'> {}
 
 export class Playlist extends Model<PlaylistAttributes, PlaylistCreationAttributes> implements PlaylistAttributes {
-  public id!: string;
-  public name!: string;
-  public userId!: string;
+  public id!: number;
+
   public album_key!: string;
   public album_artist!: string;
   public album_name!: string;
@@ -41,58 +42,65 @@ export class Playlist extends Model<PlaylistAttributes, PlaylistCreationAttribut
   public album_spotify_url!: string;
   public artist_spotify_url!: string;
 
+  public assignedUserId!: number;
+
+  // associated User model
+  public readonly assignedUser?: User;
+
   public readonly createdAt!: Date;
   public readonly updatedAt!: Date;
 }
 
-Playlist.init(
-  {
-    id: {
-      type: DataTypes.UUID,
-      defaultValue: DataTypes.UUIDV4,
-      primaryKey: true,
+export function PlaylistFactory(sequelize: Sequelize): typeof Playlist {
+  Playlist.init(
+    {
+      id: {
+        type: DataTypes.INTEGER,
+        autoIncrement: true,
+        primaryKey: true,
+      },
+      album_key: {
+        type: DataTypes.STRING,
+        allowNull: false,
+      },
+      album_artist: {
+        type: DataTypes.STRING,
+        allowNull: false,
+      },
+      album_name: {
+        type: DataTypes.STRING,
+        allowNull: false,
+      },
+      release_date: {
+        type: DataTypes.STRING,
+        allowNull: false,
+      },
+      album_img: {
+        type: DataTypes.STRING,
+        allowNull: false,
+      },
+      album_spotify_url: {
+        type: DataTypes.STRING,
+        allowNull: false,
+      },
+      artist_spotify_url: {
+        type: DataTypes.STRING,
+        allowNull: false,
+      },
+      assignedUserId: {
+        type: DataTypes.INTEGER,
+        allowNull: true,
+      },
     },
-    userId: {
-      type: DataTypes.UUID,
-      allowNull: false,
-    },
-    album_key: {
-      type: DataTypes.STRING,
-      allowNull: false,
-    },
-    album_artist: {
-      type: DataTypes.STRING,
-      allowNull: false,
-    },
-    album_name: {
-      type: DataTypes.STRING,
-      allowNull: false,
-    },
-    release_date: {
-      type: DataTypes.STRING,
-      allowNull: false,
-    },
-    album_img: {
-      type: DataTypes.STRING,
-      allowNull: false,
-    },
-    album_spotify_url: {
-      type: DataTypes.STRING,
-      allowNull: false,
-    },
-    artist_spotify_url: {
-      type: DataTypes.STRING,
-      allowNull: false,
-    },
-  },
-  {
-    sequelize,
-    modelName: 'Playlist',
-  }
-);
+    {
+      tableName: 'playlists',
+      sequelize,
+    }
+  );
+
+  return Playlist;
+}
 
 // Relationships
-Playlist.belongsTo(User, { foreignKey: 'userId', onDelete: 'CASCADE' });
-User.hasMany(Playlist, { foreignKey: 'userId' });
-
-export default Playlist;
+// Playlist.belongsTo(User, { foreignKey: 'userId', onDelete: 'CASCADE' });
+// User.hasMany(Playlist, { foreignKey: 'userId' });
