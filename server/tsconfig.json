@@ -19,11 +19,14 @@
     "noImplicitReturns": true,
     "noImplicitOverride": true,
     "useUnknownInCatchVariables": true,
-    "typeRoots": ["./node_modules/@types", "./server/types"],
+    "typeRoots": ["./node_modules/@types", "./types"],
     "baseUrl": ".",
     "paths": {
-      "*": ["server/src/*", "server/types/*"]
+      "*": ["src/*", "types/*"]
     }
   },
-  "include": ["src"]
+  "include": [
+    "src/**/*.ts",
+    "types/**/*.d.ts"
+  ]
 }

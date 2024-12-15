@@ -27,6 +27,7 @@ CREATE TABLE playlist (
     album_img VARCHAR(255),
     album_spotify_url VARCHAR(255),
     artist_spotify_url VARCHAR(255),
+    assignedUserId UUID REFERENCES users(id) ON DELETE CASCADE,
 
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
