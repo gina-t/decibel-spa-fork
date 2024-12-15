@@ -2,7 +2,7 @@ import { DataTypes, Sequelize, Model, Optional } from "sequelize";
 import { User } from "./User";
 
 interface PlaylistAttributes {
-  id: string;
+  id: number;
   album_key: string;
   album_artist: string;
   album_name: string;
@@ -20,7 +20,7 @@ export class Playlist
   extends Model<PlaylistAttributes, PlaylistCreationAttributes>
   implements PlaylistAttributes
 {
-  public id!: string;
+  public id!: number;
   public album_key!: string;
   public album_artist!: string;
   public album_name!: string;
@@ -40,8 +40,7 @@ export function PlaylistFactory(sequelize: Sequelize): typeof Playlist {
   Playlist.init(
     {
       id: {
-        type: DataTypes.UUID,
-        defaultValue: DataTypes.UUIDV4,
+        type: DataTypes.INTEGER,
         autoIncrement: true,
         primaryKey: true,
       },
@@ -74,7 +73,7 @@ export function PlaylistFactory(sequelize: Sequelize): typeof Playlist {
         allowNull: false,
       },
       assignedUserId: {
-        type: DataTypes.UUID,
+        type: DataTypes.INTEGER,
         allowNull: false,
         references: {
           model: "users",
