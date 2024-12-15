@@ -23,7 +23,7 @@ CREATE TABLE playlist (
     album_key VARCHAR(255) NOT NULL,
     album_artist VARCHAR(255) NOT NULL,
     album_name VARCHAR(255) NOT NULL,
-    release_date DATE NOT NULL,
+    release_date VARCHAR(255),
     album_img VARCHAR(255),
     album_spotify_url VARCHAR(255),
     artist_spotify_url VARCHAR(255),

@@ -1,26 +1,30 @@
-import { DataTypes, Sequelize, Model, Optional } from 'sequelize';
-import { User } from './User';
+import { DataTypes, Sequelize, Model, Optional } from "sequelize";
+import { User } from "./User";
 
 interface PlaylistAttributes {
   id: string;
   album_key: string;
   album_artist: string;
   album_name: string;
-  release_date: Date;
-  album_img?: string; 
+  release_date: string;
+  album_img?: string;
   album_spotify_url?: string;
   artist_spotify_url?: string;
   assignedUserId?: string;
 }
 
-interface PlaylistCreationAttributes extends Optional<PlaylistAttributes, 'id'> {}
+interface PlaylistCreationAttributes
+  extends Optional<PlaylistAttributes, "id"> {}
 
-export class Playlist extends Model<PlaylistAttributes, PlaylistCreationAttributes> implements PlaylistAttributes {
+export class Playlist
+  extends Model<PlaylistAttributes, PlaylistCreationAttributes>
+  implements PlaylistAttributes
+{
   public id!: string;
   public album_key!: string;
   public album_artist!: string;
   public album_name!: string;
-  public release_date!: Date;
+  public release_date!: string;
   public album_img?: string;
   public album_spotify_url?: string;
   public artist_spotify_url?: string;
@@ -54,7 +58,7 @@ export function PlaylistFactory(sequelize: Sequelize): typeof Playlist {
         allowNull: false,
       },
       release_date: {
-        type: DataTypes.DATE,
+        type: DataTypes.STRING,
         allowNull: false,
       },
       album_img: {
@@ -73,13 +77,13 @@ export function PlaylistFactory(sequelize: Sequelize): typeof Playlist {
         type: DataTypes.UUID,
         allowNull: false,
         references: {
-          model: 'users',
-          key: 'id',
+          model: "users",
+          key: "id",
+        },
       },
     },
-  },
     {
-      tableName: 'playlist',
+      tableName: "playlist",
       sequelize,
     }
   );
