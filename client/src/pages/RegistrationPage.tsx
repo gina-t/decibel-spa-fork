@@ -22,7 +22,7 @@ const RegistrationPage = () => {
       // console.log(
       //   `Email: ${email}, Password: ${password}, Confirm Password: ${confirmPassword}`
       // );
-      const response = await fetch("http://localhost:3001/api/users", {
+      const response = await fetch("http://localhost:3001/api/users/", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
