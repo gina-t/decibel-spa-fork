@@ -134,7 +134,7 @@ Start command: npm start
 
 Link to render deployment:
 
-[decibel-spa](https:/decibel-spa ... on render.com)
+[decibel-spa](https://decibel.onrender.com/)
 
 Screenshots of app demonstrating functionality:
 
