@@ -58,7 +58,9 @@ npm run dev
 3. Add @tailwind directives to index.css:
 
 @tailwind base;
+
 @tailwind components;
+
 @tailwind utilities;
 
 4. Install react-router-dom @tailwindcss/forms @tailwindcss/line-clamo
@@ -89,13 +91,17 @@ git clone git@github.com:Mjoel54/decibel-spa.git
 8. Install dependencies required for root/server/client
 
 root package.json:
+
 ``` zsh
+
 npm install express
 
 ```
 
 client package.json:
+
 ```zsh
+
 npm install jwt-decode pg pg-hstore react react-dom react-router-dom tailwind-scrollbar
 
 ```
@@ -103,6 +109,7 @@ npm install jwt-decode pg pg-hstore react react-dom react-router-dom tailwind-sc
 server package.json
 
 ```zsh
+
 npm install @types/sequelize bcrypt cors dotenv express jsonwebtoken pg sequelize sequelize-typescript
 
 ```
@@ -110,12 +117,16 @@ npm install @types/sequelize bcrypt cors dotenv express jsonwebtoken pg sequeliz
 
 ```zsh
 npm run build
+
 npm run seed
+
 npm run start:dev
+
 ```
 10. Render:
 
 Build command: npm run render-build
+
 Start command: npm start
 
 
@@ -164,6 +175,7 @@ Create a new branch for the commit and start a pull request.
 ## Authors and Acknowledgements
 
 [email] (ginadrcoder@gmail.com)
+
 [email] (mitchjoelklein@hotmail.com)
 
 ## Questions
@@ -171,9 +183,11 @@ Create a new branch for the commit and start a pull request.
 For enquiries, please contact me at:
 
 [email] (ginadrcoder@gmail.com)
+
 [github] (https://github.com/gina-t)
 
 [email] (mitchjoelklein@hotmail.com)
+
 [github] (https://github.com/Mjoel54)
 
 [github] (https://github.com/kostcon)
