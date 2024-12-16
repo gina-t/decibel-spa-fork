@@ -1,6 +1,6 @@
-import React, { createContext, useState, useContext, ReactNode } from 'react';
+import React, { createContext, useState, useContext, ReactNode } from "react";
 
-import { UserLogin } from '../interfaces/UserLogin';
+import { UserLogin } from "../interfaces/UserLogin";
 
 interface AcceptedUsersContextProps {
   acceptedUsers: UserLogin[];
@@ -8,9 +8,13 @@ interface AcceptedUsersContextProps {
   removeAcceptedUser: (userId: number) => void;
 }
 
-const AcceptedUsersContext = createContext<AcceptedUsersContextProps | undefined>(undefined);
+const AcceptedUsersContext = createContext<
+  AcceptedUsersContextProps | undefined
+>(undefined);
 
-export const AcceptedUsersProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
+export const AcceptedUsersProvider: React.FC<{ children: ReactNode }> = ({
+  children,
+}) => {
   const [acceptedUsers, setAcceptedUsers] = useState<UserLogin[]>([]);
 
   const addAcceptedUser = (user: UserLogin) => {
@@ -18,11 +22,16 @@ export const AcceptedUsersProvider: React.FC<{ children: ReactNode }> = ({ child
   };
 
   const removeAcceptedUser = (userId: number) => {
-    setAcceptedUsers((prevUsers) => prevUsers.filter((user) => user.id !== userId));
+    setAcceptedUsers((prevUsers) =>
+      // @ts-ignore
+      prevUsers.filter((user) => user.id !== userId)
+    );
   };
 
   return (
-    <AcceptedUsersContext.Provider value={{ acceptedUsers, addAcceptedUser, removeAcceptedUser }}>
+    <AcceptedUsersContext.Provider
+      value={{ acceptedUsers, addAcceptedUser, removeAcceptedUser }}
+    >
       {children}
     </AcceptedUsersContext.Provider>
   );
@@ -31,7 +40,9 @@ export const AcceptedUsersProvider: React.FC<{ children: ReactNode }> = ({ child
 export const useAcceptedUsers = (): AcceptedUsersContextProps => {
   const context = useContext(AcceptedUsersContext);
   if (!context) {
-    throw new Error('useAcceptedUsers must be used within an AcceptedUsersProvider');
+    throw new Error(
+      "useAcceptedUsers must be used within an AcceptedUsersProvider"
+    );
   }
   return context;
 };

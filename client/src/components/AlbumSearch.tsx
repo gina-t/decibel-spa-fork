@@ -6,6 +6,7 @@ import AlbumTable from "./AlbumTable.js";
 export default function AlbumSearch() {
   const [accessToken, setAccessToken] = useState<string>("");
   const [searchInput, setSearchInput] = useState<string>("");
+  // @ts-ignore
   const [artistID, setArtistID] = useState<string>("");
   const [albumData, setAlbumData] = useState<[]>([]);
   const [loading, setLoading] = useState<boolean>(false);

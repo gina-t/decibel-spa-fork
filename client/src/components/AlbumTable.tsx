@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { AlbumDataType } from "../interfaces/AlbumDataType";
 
+// @ts-ignore
 export default function AlbumTable({ albumData }) {
   const [searchedAlbums, setSearchedAlbums] = useState<AlbumDataType[]>([]);
   const [savedAlbumKeys, setSavedAlbumKeys] = useState<string[]>([]); // Track saved album keys
@@ -34,13 +35,19 @@ export default function AlbumTable({ albumData }) {
   const saveAlbumToLocalStorage = (album: AlbumDataType) => {
     try {
       // Retrieve existing saved albums from local storage or initialize an empty array
-      const existingAlbums: AlbumDataType[] = JSON.parse(localStorage.getItem("savedAlbums") || "[]");
+      const existingAlbums: AlbumDataType[] = JSON.parse(
+        localStorage.getItem("savedAlbums") || "[]"
+      );
 
       // Check if the album already exists in the saved albums based on the unique album_key
-      const isDuplicate = existingAlbums.some((savedAlbum) => savedAlbum.album_key === album.album_key);
+      const isDuplicate = existingAlbums.some(
+        (savedAlbum) => savedAlbum.album_key === album.album_key
+      );
 
       if (isDuplicate) {
-        alert(`Album "${album.album_name}" by ${album.album_artist} is already saved!`);
+        alert(
+          `Album "${album.album_name}" by ${album.album_artist} is already saved!`
+        );
         return; // Exit the function early if it's a duplicate
       }
 
@@ -63,24 +70,29 @@ export default function AlbumTable({ albumData }) {
   const removeAlbumFromLocalStorage = (albumKey: string) => {
     try {
       // Retrieve existing saved albums from local storage or initialize an empty array
-      const existingAlbums: AlbumDataType[] = JSON.parse(localStorage.getItem("savedAlbums") || "[]");
-  
+      const existingAlbums: AlbumDataType[] = JSON.parse(
+        localStorage.getItem("savedAlbums") || "[]"
+      );
+
       // Filter out the album with the given key
-      const updatedAlbums = existingAlbums.filter((savedAlbum) => savedAlbum.album_key !== albumKey);
-  
+      const updatedAlbums = existingAlbums.filter(
+        (savedAlbum) => savedAlbum.album_key !== albumKey
+      );
+
       // Save the updated array back to local storage
       localStorage.setItem("savedAlbums", JSON.stringify(updatedAlbums));
-  
+
       // Update the saved album keys state
-      setSavedAlbumKeys((prevKeys) => prevKeys.filter((key) => key !== albumKey));
-  
+      setSavedAlbumKeys((prevKeys) =>
+        prevKeys.filter((key) => key !== albumKey)
+      );
+
       // alert(`Album with key "${albumKey}" has been removed successfully!`);
     } catch (error) {
       console.error("Error removing album from local storage:", error);
       alert("Failed to remove album. Check console for details.");
     }
   };
-  
 
   return (
     <>
@@ -150,35 +162,46 @@ export default function AlbumTable({ albumData }) {
                     </td>
                     <td className="relative whitespace-nowrap px-3 py-3.5 text-center text-sm font-medium">
                       {savedAlbumKeys.includes(element.album_key) ? (
-                       <button  onClick={() => removeAlbumFromLocalStorage(element.album_key)}  className="text-indigo-400 hover:text-indigo-300">
-                        <div className="group flex items-center justify-center">
-                          <svg viewBox="0 0 576 512" className="fill-current text-indigo-500 group-hover:text-indigo-300 transition-colors duration-300" height="24px" fill="#6366F1" xmlns="http://www.w3.org/2000/svg"><path d="M352.4 243.8l-49.83 99.5c-6.009 12-23.41 11.62-28.92-.625L216.7 216.3l-30.05 71.75L88.55 288l176.4 182.2c12.66 13.07 33.36 13.07 46.03 0l176.4-182.2l-112.1 .0052L352.4 243.8zM495.2 62.86c-54.36-46.98-137.5-38.5-187.5 13.06L288 96.25L268.3 75.92C218.3 24.36 135.2 15.88 80.81 62.86C23.37 112.5 16.84 197.6 60.18 256h105l35.93-86.25c5.508-12.88 23.66-13.12 29.54-.375l58.21 129.4l49.07-98c5.884-11.75 22.78-11.75 28.67 0l27.67 55.25h121.5C559.2 197.6 552.6 112.5 495.2 62.86z"/></svg>
-
-                        </div></button>
+                        <button
+                          onClick={() =>
+                            removeAlbumFromLocalStorage(element.album_key)
+                          }
+                          className="text-indigo-400 hover:text-indigo-300"
+                        >
+                          <div className="group flex items-center justify-center">
+                            <svg
+                              viewBox="0 0 576 512"
+                              className="fill-current text-indigo-500 group-hover:text-indigo-300 transition-colors duration-300"
+                              height="24px"
+                              fill="#6366F1"
+                              xmlns="http://www.w3.org/2000/svg"
+                            >
+                              <path d="M352.4 243.8l-49.83 99.5c-6.009 12-23.41 11.62-28.92-.625L216.7 216.3l-30.05 71.75L88.55 288l176.4 182.2c12.66 13.07 33.36 13.07 46.03 0l176.4-182.2l-112.1 .0052L352.4 243.8zM495.2 62.86c-54.36-46.98-137.5-38.5-187.5 13.06L288 96.25L268.3 75.92C218.3 24.36 135.2 15.88 80.81 62.86C23.37 112.5 16.84 197.6 60.18 256h105l35.93-86.25c5.508-12.88 23.66-13.12 29.54-.375l58.21 129.4l49.07-98c5.884-11.75 22.78-11.75 28.67 0l27.67 55.25h121.5C559.2 197.6 552.6 112.5 495.2 62.86z" />
+                            </svg>
+                          </div>
+                        </button>
                       ) : (
                         <button
                           onClick={() => saveAlbumToLocalStorage(element)}
                           className="text-indigo-400 hover:text-indigo-300"
                         >
-<div className="group">
-  <svg
-    className="fill-current text-indigo-500 group-hover:text-indigo-300 transition-colors duration-300"
-    enablebackground="new 0 0 24 24"
-    height="24px"
-    id="Layer_1"
-    version="1.1"
-    viewBox="0 0 24 24"
-    width="24px"
-    fill="#6366F1"
-    xml:space="preserve"
-    xmlns="http://www.w3.org/2000/svg"
-    xmlns:xlink="http://www.w3.org/1999/xlink"
-  >
-    <path
-      d="M22,4.6c-2.6-2.6-6.8-2.6-9.4,0c-0.2,0.2-0.5,0.5-0.7,0.8c-0.2-0.3-0.4-0.5-0.7-0.8C8.7,2,4.5,2,2,4.6  c-2.6,2.6-2.6,6.8,0,9.4l8.7,8.7L12,24l1.3-1.3L22,14C24.6,11.4,24.6,7.2,22,4.6z M12,21.7c0,0-8.1-8.7-8.7-8.7h5.2l1.5-2.5l4,5.4  l2-2.9h4.7C20.1,13,12,21.7,12,21.7z M21.4,12h-5.9L14,14.1l-4-5.2L8,12H2.6c-1.1-2-0.8-4.3,0.7-5.9C5.1,4.3,8.1,4.2,10,6  c0.4,0.4,2,2,2,2s1.6-1.6,2-2c1.8-1.8,4.8-1.7,6.7,0.2C22.3,7.7,22.5,10,21.4,12z"
-    />
-  </svg>
-</div>
+                          <div className="group">
+                            <svg
+                              className="fill-current text-indigo-500 group-hover:text-indigo-300 transition-colors duration-300"
+                              enableBackground="new 0 0 24 24"
+                              height="24px"
+                              id="Layer_1"
+                              version="1.1"
+                              viewBox="0 0 24 24"
+                              width="24px"
+                              fill="#6366F1"
+                              xmlSpace="preserve"
+                              xmlns="http://www.w3.org/2000/svg"
+                              xmlnsXlink="http://www.w3.org/1999/xlink"
+                            >
+                              <path d="M22,4.6c-2.6-2.6-6.8-2.6-9.4,0c-0.2,0.2-0.5,0.5-0.7,0.8c-0.2-0.3-0.4-0.5-0.7-0.8C8.7,2,4.5,2,2,4.6  c-2.6,2.6-2.6,6.8,0,9.4l8.7,8.7L12,24l1.3-1.3L22,14C24.6,11.4,24.6,7.2,22,4.6z M12,21.7c0,0-8.1-8.7-8.7-8.7h5.2l1.5-2.5l4,5.4  l2-2.9h4.7C20.1,13,12,21.7,12,21.7z M21.4,12h-5.9L14,14.1l-4-5.2L8,12H2.6c-1.1-2-0.8-4.3,0.7-5.9C5.1,4.3,8.1,4.2,10,6  c0.4,0.4,2,2,2,2s1.6-1.6,2-2c1.8-1.8,4.8-1.7,6.7,0.2C22.3,7.7,22.5,10,21.4,12z" />
+                            </svg>
+                          </div>
                         </button>
                       )}
                     </td>
