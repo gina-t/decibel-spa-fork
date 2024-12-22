@@ -1,17 +1,36 @@
 import { MagnifyingGlassIcon } from "@heroicons/react/24/solid";
 import { useState, useEffect, ChangeEvent, FormEvent } from "react";
-import { getToken } from "../API/spotifyAuth.js";
+import { getToken } from "../routes/spotifyAuth.js";
+import { AlbumData } from "../interfaces/AlbumData.js";
 import AlbumTable from "./AlbumTable.js";
+
+interface Artist {
+  id: string;
+  name: string;
+  external_urls: {
+    spotify: string;
+  };
+}
+
+interface Album {
+  id: string;
+  name: string;
+  release_date: string;
+  images: { url: string }[];
+  external_urls: {
+    spotify: string;
+  };
+  artists: Artist[];
+}
 
 export default function AlbumSearch() {
   const [accessToken, setAccessToken] = useState<string>("");
+  const [tokenExpirationTime, setTokenExpirationTime] = useState<number>(0);
   const [searchInput, setSearchInput] = useState<string>("");
-  // @ts-ignore
-  const [artistID, setArtistID] = useState<string>("");
-  const [albumData, setAlbumData] = useState<[]>([]);
+  const [artistId, setArtistId] = useState<string>("");
+  const [albumData, setAlbumData] = useState<AlbumData[]>([]);
   const [loading, setLoading] = useState<boolean>(false);
 
-  // Calls the fetchToken function once when the component is initially rendered
   useEffect(() => {
     fetchToken();
   }, []);
@@ -19,34 +38,40 @@ export default function AlbumSearch() {
   // Fetches an access token to Spotify to be able to make API requests
   const fetchToken = async (): Promise<void> => {
     try {
-      // NOTE: Functioning application used let instead of const
-      const token = await getToken(); // Wait for the Promise to resolve
+      const tokenResponse = await getToken(); // Wait for the Promise to resolve
+      const token = tokenResponse.access_token; // Extract the access token
+      const expiresIn = tokenResponse.expires_in; // Extract the expiration time
 
       setAccessToken(token); // Set the access token
-      // console.log(token); // Log the full token object
-      // console.log(`Token: ${token}`); // Log the access token
+      setTokenExpirationTime(Date.now() + expiresIn * 1000); // Set the token expiration time
       console.log("Token set");
     } catch (error) {
       console.error("Error fetching token:", error);
     }
   };
 
+  const isTokenExpired = (): boolean => {
+    return Date.now() > tokenExpirationTime;
+  };
+
   // Handles user changes to the search input field
   const handleChange = (e: ChangeEvent<HTMLInputElement>): void => {
     setSearchInput(e.target.value);
-    // console.log(`searchInput: ${searchInput}`);
   };
 
   // Handles the form search event
   async function search(e: FormEvent): Promise<void> {
     e.preventDefault();
-
-    //Render the loading spinner
+    // Render the loading spinner
     setLoading(true);
+
+    if (isTokenExpired()) {
+      console.log("Token expired, fetching a new one...");
+      await fetchToken();
+    }
 
     try {
       console.log(`Search function: ${searchInput}`);
-
       // Search parameters to be passed into fetch requests
       const searchParameters = {
         method: `GET`,
@@ -63,9 +88,13 @@ export default function AlbumSearch() {
       );
       const retrievedArtistData = await retrievedArtist.json();
 
+      if (!retrievedArtistData.artists || !retrievedArtistData.artists.items.length) {
+        throw new Error("No artist found");
+      }
+
       // Transform and set the artist ID in a useState
       const fetchedArtistId = retrievedArtistData.artists.items[0].id;
-      setArtistID(fetchedArtistId); // Update state for later use
+      setArtistId(fetchedArtistId);
       console.log(`Fetched Artist ID: ${fetchedArtistId}`);
 
       // Fetch Album data from the Spotify API
@@ -76,12 +105,22 @@ export default function AlbumSearch() {
       const retrievedAlbumData = await retrievedAlbums.json();
 
       // Update albumData state
-      setAlbumData(retrievedAlbumData.items); // Update albumData state
-      console.log("Album Data:", retrievedAlbumData.items);
+      const albums: AlbumData[] = retrievedAlbumData.items.map((item: Album) => ({
+        album_key: item.id,
+        album_artist: item.artists[0].name,
+        album_name: item.name,
+        release_date: item.release_date,
+        album_img: item.images[0]?.url || "",
+        album_spotify_url: item.external_urls.spotify,
+        artist_spotify_url: item.artists[0].external_urls.spotify,
+      }));
+
+      setAlbumData(albums); // Update albumData state
+      console.log("Album Data:", albums);
     } catch (error) {
       console.error("Error during search:", error);
     } finally {
-      //Remove loading spinner
+      // Remove loading spinner
       setLoading(false);
     }
   }
@@ -138,6 +177,11 @@ export default function AlbumSearch() {
           Search
         </button>
       </form>
+      {artistId && (
+        <div className="text-center text-white">
+          <p>Artist ID: {artistId}</p>
+        </div>
+      )}
 
       <AlbumTable albumData={albumData} />
     </>

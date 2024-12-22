@@ -2,6 +2,7 @@ import { Router, Request, Response } from "express";
 import { User } from "../models/User.js";
 import jwt from "jsonwebtoken";
 import bcrypt from "bcrypt";
+import { registerUser } from "controllers/auth-controller.js";
 
 export const login = async (req: Request, res: Response) => {
   // TODO: If the user exists and the password is correct, return a JWT token
@@ -39,10 +40,10 @@ router.post("/login", login);
 
 export { router as authRoutes };
 
-// const authRouter = Router();
+const authRouter = Router();
 
-// // Route for user registration
-// authRouter.post('/register', registerUser);
+// Route for user registration
+authRouter.post('/register', registerUser);
 
 // // Route for user login
 // authRouter.post('/login', loginUser);
@@ -50,4 +51,4 @@ export { router as authRoutes };
 // // Route for user logout (protected route)
 // authRouter.post('/logout', authenticateToken, logoutUser);
 
-// export { authRouter };
+export { authRouter };

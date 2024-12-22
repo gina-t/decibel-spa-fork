@@ -1,5 +1,3 @@
-// import { SpotifyTokenResponse } from "../interfaces/SpotifyTokenResponse";
-
 // Get Spotify Token
 export async function getToken() {
   const clientId = import.meta.env.VITE_CLIENT_ID;
@@ -15,23 +13,32 @@ export async function getToken() {
       method: "POST",
       headers: {
         "Content-Type": "application/x-www-form-urlencoded",
+        "Authorization": "Basic " + btoa(clientId + ":" + clientSecret)
       },
       body: new URLSearchParams({
-        grant_type: "client_credentials",
-        client_id: clientId,
-        client_secret: clientSecret,
+        grant_type: "client_credentials"
       }),
     });
 
     if (!response.ok) {
-      throw new Error(`Failed to get token: ${response.statusText}`);
+      const errorResponse = await response.json();
+      throw new Error(`Failed to get token: ${response.statusText} - ${errorResponse.error_description}`);
     }
 
     const data = await response.json();
-    // console.log("Access Token:", data.access_token);
     console.log("Spotify token retrieved successfully.");
-    return data.access_token; // Return the token for further use
+    return data;
   } catch (error) {
     console.error("Error fetching access token:", error);
+    throw error;
   }
+}
+
+// Generate Spotify Authorization URL
+export function getAuthorizationUrl() {
+  const clientId = import.meta.env.VITE_CLIENT_ID;
+  const redirectUri = "http://localhost:5173/callback";
+  const scopes = "user-read-private user-read-email";
+
+  return `https://accounts.spotify.com/authorize?response_type=token&client_id=${clientId}&scope=${encodeURIComponent(scopes)}&redirect_uri=${encodeURIComponent(redirectUri)}`;
 }
