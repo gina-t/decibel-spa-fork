@@ -4,7 +4,7 @@ import PlaylistTable from "../components/PlaylistTable";
 const PlayListsPage = () => {
   return (
     <div>
-      <Header heading="Saved Playlists" description="Test" />
+      <Header heading="Saved Playlists" description="Tailored to you" />
       <PlaylistTable />
     </div>
   )

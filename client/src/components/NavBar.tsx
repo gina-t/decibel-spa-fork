@@ -8,9 +8,9 @@ import { Link } from 'react-router-dom';
 
 const navigation = [
   { name: 'Dashboard', to: '/', current: true },
-  { name: 'Log In', to: '/login', current: false },
-  { name: 'Register', to: '/registration', current: false },
   { name: 'Learn More', to: '/learn-more', current: false },
+  { name: 'Register', to: '/registration', current: false },
+  { name: 'Log In', to: '/login', current: false },
   { name: 'Album Search', to: '/album-search', current: false },
   { name: 'Playlists', to: '/playlists', current: false },
 ];
@@ -36,7 +36,11 @@ const NavBar = () => {
           <div className="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start">
             {/* Logo */}
             <div className="flex shrink-0 items-center">
-              <img alt="logo" src={logo} className="h-8 w-auto" />
+              <img 
+                alt="logo" 
+                src={logo} 
+                className="h-8 w-auto" 
+              />
             </div>
             {/* Navigation links */}
             <div className="hidden sm:ml-6 sm:block">
@@ -46,11 +50,11 @@ const NavBar = () => {
                     <Link
                       key={item.name}
                       to={item.to}
+                      aria-current={item.current ? 'page' : undefined}
                       className={classNames(
                         item.current ? 'bg-gray-900 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white',
-                        'px-3 py-2 rounded-md text-lg font-medium'
+                        'rounded-md px-3 py-2 text-sm font-medium'
                       )}
-                      aria-current={item.current ? 'page' : undefined}
                     >
                       {item.name}
                     </Link>

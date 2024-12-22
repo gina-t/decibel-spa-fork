@@ -1,4 +1,4 @@
-//a function to retieve user data from the server
+// a function to retieve user data from the server
 import AuthService from '../utils/auth'; 
 
 const retrieveUsers = async () => {

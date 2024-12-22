@@ -16,7 +16,7 @@ const Header: React.FC<HeaderProps> = ({ heading, description }) => {
           src={logo}
           className="mx-auto h-10 w-auto mb-10"
         />
-        <h2 className="text-4xl font-semibold tracking-tight text-white sm:text-5xl">
+        <h2 className="text-xl font-semibold tracking-tight text-white sm:text-4xl">
           {heading}
         </h2>
         <p className="mt-8 text-pretty text-lg font-medium text-gray-400 sm:text-xl/8">

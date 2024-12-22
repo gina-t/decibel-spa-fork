@@ -1,42 +1,45 @@
-import { useState, useEffect } from "react";
-import { AlbumDataType } from "../interfaces/AlbumDataType";
+import { useState, useEffect } from 'react';
+import { AlbumData } from '../interfaces/AlbumData';
 
-// @ts-ignore
-export default function AlbumTable({ albumData }) {
-  const [searchedAlbums, setSearchedAlbums] = useState<AlbumDataType[]>([]);
-  const [savedAlbumKeys, setSavedAlbumKeys] = useState<string[]>([]); // Track saved album keys
+interface AlbumTableProps {
+  albumData: AlbumData[];
+}
+
+export default function AlbumTable({ albumData }: AlbumTableProps) {
+  const [searchedAlbums, setSearchedAlbums] = useState<AlbumData[]>([]);
+  const [savedAlbumKeys, setSavedAlbumKeys] = useState<string[]>([]); 
 
   // Fetch saved albums from local storage on mount
   useEffect(() => {
-    const savedData = localStorage.getItem("savedAlbums");
+    const savedData = localStorage.getItem('savedAlbums');
     if (savedData) {
-      const savedAlbums: AlbumDataType[] = JSON.parse(savedData);
+      const savedAlbums: AlbumData[] = JSON.parse(savedData);
       const savedKeys = savedAlbums.map((album) => album.album_key);
       setSavedAlbumKeys(savedKeys);
     }
   }, []);
 
-  // Update the album search table if the user searches for something new
+  // Update the album search table if the user searches for new album 
   useEffect(() => {
     if (Array.isArray(albumData) && albumData.length > 0) {
-      const transformedAlbumData: AlbumDataType[] = albumData.map((album) => ({
-        album_key: album.id,
-        album_artist: album.artists[0].name,
-        album_name: album.name,
+      const transformedAlbumData: AlbumData[] = albumData.map((album) => ({
+        album_key: album.album_key,
+        album_artist: album.album_artist,
+        album_name: album.album_name,
         release_date: album.release_date,
-        album_img: album.images[1]?.url || "", // Ensure a fallback if no image is present
-        album_spotify_url: album.external_urls.spotify,
-        artist_spotify_url: album.artists[0].external_urls.spotify,
+        album_img: album.album_img || '', // Ensure a fallback if no image is present
+        album_spotify_url: album.album_spotify_url,
+        artist_spotify_url: album.artist_spotify_url,
       }));
       setSearchedAlbums(transformedAlbumData);
     }
   }, [albumData]);
 
-  const saveAlbumToLocalStorage = (album: AlbumDataType) => {
+  const saveAlbumToLocalStorage = (album: AlbumData) => {
     try {
       // Retrieve existing saved albums from local storage or initialize an empty array
-      const existingAlbums: AlbumDataType[] = JSON.parse(
-        localStorage.getItem("savedAlbums") || "[]"
+      const existingAlbums: AlbumData[] = JSON.parse(
+        localStorage.getItem('savedAlbums') || '[]'
       );
 
       // Check if the album already exists in the saved albums based on the unique album_key
@@ -55,23 +58,23 @@ export default function AlbumTable({ albumData }) {
       const updatedAlbums = [...existingAlbums, album];
 
       // Save the updated array back to local storage
-      localStorage.setItem("savedAlbums", JSON.stringify(updatedAlbums));
+      localStorage.setItem('savedAlbums', JSON.stringify(updatedAlbums));
 
       // Update the saved album keys state
       setSavedAlbumKeys((prevKeys) => [...prevKeys, album.album_key]);
 
       // alert(`Album "${album.album_name}" by ${album.album_artist} added successfully!`);
     } catch (error) {
-      console.error("Error saving album to local storage:", error);
-      alert("Failed to save album. Check console for details.");
+      console.error('Error saving album to local storage:', error);
+      alert('Failed to save album. Check console for details.');
     }
   };
 
   const removeAlbumFromLocalStorage = (albumKey: string) => {
     try {
       // Retrieve existing saved albums from local storage or initialize an empty array
-      const existingAlbums: AlbumDataType[] = JSON.parse(
-        localStorage.getItem("savedAlbums") || "[]"
+      const existingAlbums: AlbumData[] = JSON.parse(
+        localStorage.getItem('savedAlbums') || '[]'
       );
 
       // Filter out the album with the given key
@@ -80,7 +83,7 @@ export default function AlbumTable({ albumData }) {
       );
 
       // Save the updated array back to local storage
-      localStorage.setItem("savedAlbums", JSON.stringify(updatedAlbums));
+      localStorage.setItem('savedAlbums', JSON.stringify(updatedAlbums));
 
       // Update the saved album keys state
       setSavedAlbumKeys((prevKeys) =>
@@ -89,8 +92,8 @@ export default function AlbumTable({ albumData }) {
 
       // alert(`Album with key "${albumKey}" has been removed successfully!`);
     } catch (error) {
-      console.error("Error removing album from local storage:", error);
-      alert("Failed to remove album. Check console for details.");
+      console.error('Error removing album from local storage:', error);
+      alert('Failed to remove album. Check console for details.');
     }
   };
 
@@ -111,7 +114,7 @@ export default function AlbumTable({ albumData }) {
                     scope="col"
                     className="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-white sm:pl-0"
                   >
-                    {""}
+                    {''}
                   </th>
                   <th
                     scope="col"
@@ -144,7 +147,7 @@ export default function AlbumTable({ albumData }) {
                           className="w-11 h-11 rounded-full"
                         />
                       ) : (
-                        <span>{""}</span>
+                        <span>{''}</span>
                       )}
                     </td>
                     <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-300">

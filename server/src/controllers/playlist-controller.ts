@@ -3,10 +3,7 @@ import { Playlist } from "../models/Playlist.js";
 import { User } from "../models/User.js";
 
 // GET /albums
-export const getAllAlbumsFromPlaylist = async (
-  _req: Request,
-  res: Response
-) => {
+export const getAllAlbumsFromPlaylist = async (_req: Request, res: Response) => {
   try {
     const playlist = await Playlist.findAll({
       include: [
