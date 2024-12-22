@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import logo from "../assets/logo.svg";
 
 const RegistrationPage = () => {
+  const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
@@ -19,21 +20,23 @@ const RegistrationPage = () => {
     }
 
     try {
-      // console.log(
-      //   `Email: ${email}, Password: ${password}, Confirm Password: ${confirmPassword}`
-      // );
-      const response = await fetch("http://localhost:3001/api/users/", {
+      console.log(
+        `Username: ${username}, Email: ${email}, Password: ${password}, Confirm Password: ${confirmPassword}`
+      );
+      const requestBody = { username, email, password };
+      console.log('Request Body:', requestBody);
+
+      const response = await fetch("http://localhost:3001/api/user/", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ email, password, username: email }),
+        body: JSON.stringify(requestBody),
       });
 
       if (!response.ok || response.status !== 201) {
         throw new Error("Failed to register");
       }
-
       // Handle successful registration (e.g., redirect to login page)
       console.log("Registration successful");
       navigate("/login");
@@ -47,23 +50,43 @@ const RegistrationPage = () => {
   };
 
   return (
-    <div className="bg-gray-900 px-6 py-12 lg:px-8">
-      <div className="mx-auto max-w-2xl text-center">
-        <img alt="Logo" src={logo} className="mx-auto h-10 w-auto mb-10" />
-        <h2 className="text-4xl font-semibold tracking-tight text-white sm:text-5xl">
+    <div className="flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8">
+      <div className="sm:mx-auto sm:w-full sm:max-w-sm">
+        <img alt="Decibel logo" src={logo} className="mx-auto h-10 w-auto mb-10" />
+        <h2 className="mt-10 text-center text-xl font-semibold tracking-tight text-white sm:text-4xl">
           Register
         </h2>
       </div>
-
-      <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-[480px]">
-        <div className="bg-white px-6 py-12 shadow sm:rounded-lg sm:px-12">
+     
+      <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
+        
           <form onSubmit={handleSubmit} className="space-y-6">
+            <div>
+              <label 
+                htmlFor="username"
+                className="block text-sm/6 font-medium text-white"
+                >
+                  Username
+                </label>
+              <div className="mt-2">
+                <input
+                  id="username"
+                  name="username"
+                  type="text"
+                  required
+                  autoComplete="username"
+                  value={username}
+                  onChange={(e) => setUsername(e.target.value)}
+                  className="block w-full rounded-md bg-white/5 px-3 py-1.5 text-base text-white outline outline-1 -outline-offset-1 outline-white/10 placeholder:text-gray-500 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-500 sm:text-sm/6"
+                />
+              </div>
+            </div>
             <div>
               <label
                 htmlFor="email"
-                className="block text-sm/6 font-medium text-gray-900"
+                className="block text-sm/6 font-medium text-white"
               >
-                Username or Email
+                Email address
               </label>
               <div className="mt-2">
                 <input
@@ -74,7 +97,7 @@ const RegistrationPage = () => {
                   autoComplete="email"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  className="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6"
+                  className="block w-full rounded-md bg-white/5 px-3 py-1.5 text-base text-white outline outline-1 -outline-offset-1 outline-white/10 placeholder:text-gray-500 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-500 sm:text-sm/6"
                 />
               </div>
             </div>
@@ -82,7 +105,7 @@ const RegistrationPage = () => {
             <div>
               <label
                 htmlFor="password"
-                className="block text-sm/6 font-medium text-gray-900"
+                className="block text-sm/6 font-medium text-white"
               >
                 Password
               </label>
@@ -95,7 +118,7 @@ const RegistrationPage = () => {
                   autoComplete="new-password"
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
-                  className="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6"
+                  className="block w-full rounded-md bg-white/5 px-3 py-1.5 text-base text-white outline outline-1 -outline-offset-1 outline-white/10 placeholder:text-gray-500 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-500 sm:text-sm/6"
                 />
               </div>
             </div>
@@ -103,7 +126,7 @@ const RegistrationPage = () => {
             <div>
               <label
                 htmlFor="confirmPassword"
-                className="block text-sm/6 font-medium text-gray-900"
+                className="block text-sm/6 font-medium text-white"
               >
                 Confirm Password
               </label>
@@ -116,7 +139,7 @@ const RegistrationPage = () => {
                   autoComplete="new-password"
                   value={confirmPassword}
                   onChange={(e) => setConfirmPassword(e.target.value)}
-                  className="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6"
+                  className="block w-full rounded-md bg-white/5 px-3 py-1.5 text-base text-white outline outline-1 -outline-offset-1 outline-white/10 placeholder:text-gray-500 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-500 sm:text-sm/6"
                 />
               </div>
             </div>
@@ -126,14 +149,13 @@ const RegistrationPage = () => {
             <div>
               <button
                 type="submit"
-                className="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm/6 font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+                className="flex w-full justify-center rounded-md bg-indigo-500 px-3 py-1.5 text-sm/6 font-semibold text-white shadow-sm hover:bg-indigo-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-500"
               >
                 Register
               </button>
             </div>
           </form>
-
-          <div>
+          // login link
             <div className="relative mt-10">
               <div
                 aria-hidden="true"
@@ -142,7 +164,7 @@ const RegistrationPage = () => {
                 <div className="w-full border-t border-gray-200" />
               </div>
               <div className="relative flex justify-center text-sm/6 font-medium">
-                <span className="bg-white px-6 text-gray-900">
+                <span className="bg-white px-6 text-gray-900 rounded-sm">
                   Or continue with
                 </span>
               </div>
@@ -195,8 +217,6 @@ const RegistrationPage = () => {
             </div>
           </div>
         </div>
-      </div>
-    </div>
   );
 };
 

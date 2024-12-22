@@ -34,7 +34,9 @@ const LearnMorePage = () => {
       </div>
       <div className="mx-auto max-w-7xl px-6 lg:px-8">
         <div className="mx-auto max-w-2xl lg:mx-0">
-          <h2 className="text-xl font-semibold tracking-tight text-white sm:text-4xl">About our app</h2>
+          <h2 className="text-xl font-semibold tracking-tight text-white sm:text-4xl">
+            About our app
+          </h2>
           <p className="mt-8 text-pretty text-xl font-medium text-gray-400 sm:text-xl/8">
             Decibel is a music streaming service that allows you to listen to your favorite music, create playlists, and share them with your friends. Our app is designed to resonate with you.
           </p>

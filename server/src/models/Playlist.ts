@@ -89,7 +89,3 @@ export function PlaylistFactory(sequelize: Sequelize): typeof Playlist {
 
   return Playlist;
 }
-
-// Relationships
-// Playlist.belongsTo(User, { foreignKey: 'userId', onDelete: 'CASCADE' });
-// User.hasMany(Playlist, { foreignKey: 'userId' });

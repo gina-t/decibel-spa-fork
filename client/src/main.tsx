@@ -10,6 +10,7 @@ import LoginPage from './pages/LoginPage';
 import RegistrationPage from './pages/RegistrationPage';
 import PlayListsPage from './pages/PlayListsPage';
 import LearnMorePage from './pages/LearnMorePage';
+import Callback from './components/Callback';
 
 const router = createBrowserRouter([
   {
@@ -40,6 +41,10 @@ const router = createBrowserRouter([
       {
         path: '/learn-more',
         element: <LearnMorePage />,
+      },
+      {
+        path: '/callback',
+        element: <Callback />,
       },
     ],
   },
