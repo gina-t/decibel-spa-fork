@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import AuthService from '../utils/auth'; 
 import logo from '../assets/logo.svg';
 import { Link } from 'react-router-dom';
-import { useAcceptedUsers } from '../context/AcceptedUsersContext';
+import { useAcceptedUsers } from '../hooks/useAcceptedUsers';
 
 const LoginPage: React.FC = () => {
   const [username, setUsername] = useState('');

@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import AuthService from '../utils/auth'; 
 import logo from '../assets/logo.svg';
 import { Link } from 'react-router-dom';
-import { useAcceptedUsers } from '../context/AcceptedUsersContext';
+import { useAcceptedUsers } from '../hooks/useAcceptedUsers';
 
 const LoginPage: React.FC = () => {
   const [username, setUsername] = useState('');
@@ -17,8 +17,8 @@ const LoginPage: React.FC = () => {
     event.preventDefault();
 
     // Replace this with your actual login logic
-    const idToken = 'your_jwt_token'; // Get this from your authentication API
-    const user = { id: Date.now(), username, email, password }; // Add other user properties as needed
+    const idToken = 'eeccfb235c13764169cc452a896cd0c6733cae0d04239da39d29344badc7729273309ab2cc6b876bec9f892030d68742ee5b3a725dc09c6cdd96effb545de8cf'; 
+    const user = { id: Date.now(), username, email, password }; 
 
     // Log in the user using AuthService
     AuthService.login(idToken, user);
@@ -35,7 +35,7 @@ const LoginPage: React.FC = () => {
       <div className="sm:mx-auto sm:w-full sm:max-w-sm">
         <img alt="Decibel logo" src={logo} className="mx-auto h-10 w-auto" />
         <h2 className="mt-10 text-center text-xl font-semibold tracking-tight text-white sm:text-4xl">
-          Log in to your account
+          Log in 
         </h2>
       </div>
     
