@@ -1,25 +1,31 @@
-import React, { createContext, useState, useContext, ReactNode } from "react";
+import React, { createContext, useState, ReactNode } from "react";
 import { UserLogin } from "../interfaces/UserLogin";
 
-interface AcceptedUsersContextProps {
+// Define the shape of the context value
+export interface AcceptedUsersContextProps {
   acceptedUsers: UserLogin[];
   addAcceptedUser: (user: UserLogin) => void;
   removeAcceptedUser: (userId: number) => void;
 }
 
+// Create the context with an initial value of undefined
 const AcceptedUsersContext = createContext<AcceptedUsersContextProps | undefined>(undefined);
 
+// Define the provider component
 export const AcceptedUsersProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
   const [acceptedUsers, setAcceptedUsers] = useState<UserLogin[]>([]);
 
+  // Function to add a user to the accepted users list
   const addAcceptedUser = (user: UserLogin) => {
     setAcceptedUsers((prevUsers) => [...prevUsers, user]);
   };
 
+  // Function to remove a user from the accepted users list
   const removeAcceptedUser = (userId: number) => {
     setAcceptedUsers((prevUsers) => prevUsers.filter((user) => user.id !== userId));
   };
 
+  // Provide the context value to children components
   return (
     <AcceptedUsersContext.Provider value={{ acceptedUsers, addAcceptedUser, removeAcceptedUser }}>
       {children}
@@ -27,10 +33,5 @@ export const AcceptedUsersProvider: React.FC<{ children: ReactNode }> = ({ child
   );
 };
 
-export const useAcceptedUsers = () => {
-  const context = useContext(AcceptedUsersContext);
-  if (!context) {
-    throw new Error("useAcceptedUsers must be used within an AcceptedUsersProvider");
-  }
-  return context;
-};
+// Export the context separately
+export { AcceptedUsersContext };
