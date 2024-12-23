@@ -1,3 +1,4 @@
+
 # Node modules
 node_modules
 
@@ -27,3 +28,4 @@ Thumbs.db
 *.ntvs*
 *.njsproj
 *.sln
+server/.env
